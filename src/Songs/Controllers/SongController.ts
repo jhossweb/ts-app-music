@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { json } from "stream/consumers";
+
 
 export class SongController 
 {
@@ -8,7 +8,13 @@ export class SongController
     }
 
     store(req: Request, res: Response) {
-        console.log(req.file)
-        return res.json("guardado")
+        
+        let file = req.file as Express.Multer.File
+        const nameSong = req.body.nameSong
+
+        return res.json({
+            file,
+            nameSong
+        })
     }
 }

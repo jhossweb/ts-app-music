@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express'
 import multer, { FileFilterCallback } from 'multer'
 import path from 'node:path'
 import crypto from "node:crypto"
-import * as  mm from 'music-metadata'
 
 export class SongMiddleware
 {
@@ -53,7 +52,7 @@ export class SongMiddleware
             // File not selected or incorrect format
             if (!req.file)
             return res.status(400).json({
-                msg: "No file has been uploaded, remember that you can only upload .jpeg, .jpg, .png and .gif formats.",
+                msg: "solo formatos de audio: mp3.",
             });
 
            
