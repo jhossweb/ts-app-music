@@ -9,6 +9,11 @@ export class SongRouter extends BaseRouter <SongController, SongMiddleware>
     }
 
     routes() {
+        this.router.get(
+            "/uploads",
+            (req, res) => this.controller.index(req, res)
+        )
+
         this.router.post(
             '/uploads',
             (req, res, next) => [this.middleware.upload(req, res, next)],
