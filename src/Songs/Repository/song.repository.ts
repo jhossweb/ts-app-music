@@ -12,13 +12,8 @@ export class SongRepository
     }
 
     async createSongRepository (name: string, url_song: string) {
-        const savedSong = await this.prisma.song.create({
-            data: {
-                name,
-                url_song
-            }
-        })
+        
 
-        return savedSong
+        return 
     }
 }

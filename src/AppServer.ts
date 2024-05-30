@@ -1,5 +1,6 @@
 import express, { Application, urlencoded } from "express";
 import { SongRouter } from "./Songs/song.router";
+import { GenderRouter } from "./Genders/gender.router";
 
 export class AppServer
 {
@@ -21,6 +22,7 @@ export class AppServer
 
     private routes (): Array<express.Router> {
         return [
+            new GenderRouter().router,
             new SongRouter().router
         ]
     }
