@@ -1,24 +1,24 @@
 import { Request, Response } from "express";
-import { SongRepository } from "../Repository/song.repository";
+import { CustomerError } from "../../libs/customer.errors";
 
 
 export class SongController 
 {
     constructor(
-        private readonly songRepository: SongRepository = new SongRepository 
+        private readonly customerError: CustomerError = new CustomerError
     ) {}
 
     async index (req: Request, res: Response) {
-        const songs = await this.songRepository.allSongRepository()
-        return res.json(songs)
+        try {
+            return res.json("controller song")
+            
+        } catch (error) {
+            return this.customerError.Error(error)
+        }
     }
 
     async store(req: Request, res: Response) {
 
-        let file = req.file as Express.Multer.File
-        const nameSong = req.body.nameSong
-        
-        const savedSong = await this.songRepository.createSongRepository(nameSong, file.path)
-        return res.json( savedSong )
+      return res.json("")
     }
 }

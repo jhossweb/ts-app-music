@@ -1,14 +1,17 @@
 import express, { Application, urlencoded } from "express";
 import { SongRouter } from "./Songs/song.router";
-import { GenderRouter } from "./Genders/gender.router";
+import { Conexion } from "./config/conexion";
+import { DataSource } from "typeorm";
 
-export class AppServer
+export class AppServer extends Conexion
 {
     private app: Application
     private port: number = 3000
 
     constructor () {
+        super()
         this.app = express()
+        this.dbConexion()
 
         this.middlewares()
         this.app.use(this.routes())
@@ -22,9 +25,12 @@ export class AppServer
 
     private routes (): Array<express.Router> {
         return [
-            new GenderRouter().router,
             new SongRouter().router
         ]
+    }
+
+    private async dbConexion (): Promise<DataSource> {
+        return this.initConexion
     }
 
     listen() {
