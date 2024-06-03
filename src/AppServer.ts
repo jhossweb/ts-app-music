@@ -2,6 +2,7 @@ import express, { Application, urlencoded } from "express";
 import { SongRouter } from "./Songs/song.router";
 import { Conexion } from "./config/conexion";
 import { DataSource } from "typeorm";
+import { UserRouter } from "./users/user.router";
 
 export class AppServer extends Conexion
 {
@@ -25,7 +26,8 @@ export class AppServer extends Conexion
 
     private routes (): Array<express.Router> {
         return [
-            new SongRouter().router
+            new SongRouter().router,
+            new UserRouter().router
         ]
     }
 
