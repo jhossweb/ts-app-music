@@ -1,3 +1,4 @@
+import { DeleteResult, UpdateResult } from "typeorm";
 import { AppDataSource } from "../../config/data-source";
 import { RoleDTO } from "../dto/role.dto";
 import { RoleEntity } from "../entities/role.entity";
@@ -20,5 +21,19 @@ export class RoleService
     async createdRole (role: RoleDTO): Promise<RoleEntity> {
         const newRole = this.repository.getRepository(RoleEntity).create(role)
         return await this.repository.getRepository(RoleEntity).save(newRole) 
+    }
+
+    async updateRoleService(id: number|string, name_role: RoleDTO): Promise<UpdateResult> {
+        return await this.repository.getRepository(RoleEntity)
+                                    .createQueryBuilder("roles")
+                                    .where("id = :id", { id })
+                                    .update(RoleEntity)
+                                    .set({name_role: name_role.name_role})
+                                    .execute()
+    }
+
+    async deleteRoleService (id: number|string): Promise<DeleteResult> {
+        return await this.repository.getRepository(RoleEntity)
+                                    .delete(id)
     }
 }

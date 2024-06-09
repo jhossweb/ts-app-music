@@ -7,10 +7,10 @@ const Config: DataSourceOptions = {
     username: "root",
     password: "123456",
     database: "appmusic",
-    entities: [ __dirname + "/../**/*.entity{.ts,.js}" ],
-    migrations: [ __dirname + "/../**/*.entity{.ts,.js}" ],
-    synchronize: true,
-    migrationsRun: false
+    entities: [__dirname + "/../**/*.entity{.ts,.js}"],
+    migrations: [__dirname + "/../migrations/*{.ts,.js}"],
+    synchronize: false,
+    migrationsRun: true
 }
 
 export const AppDataSource: DataSource = new DataSource(Config)

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { genderDTO } from "../dto/gender.dto";
+import { GenderDTO } from "../dto/gender.dto";
 import { validate } from "class-validator";
 
 export class GenderMiddleware
@@ -10,7 +10,7 @@ export class GenderMiddleware
         next: NextFunction) {
             
             const { name_gender } = req.body
-            const valid = new genderDTO
+            const valid = new GenderDTO
 
             valid.name_gender = name_gender
 

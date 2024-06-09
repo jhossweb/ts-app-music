@@ -3,6 +3,7 @@ import { SongRouter } from "./Songs/song.router";
 import { Conexion } from "./config/conexion";
 import { DataSource } from "typeorm";
 import { UserRouter } from "./users/user.router";
+import { GenderRouter } from "./Genders/gender.router";
 
 export class AppServer extends Conexion
 {
@@ -26,13 +27,14 @@ export class AppServer extends Conexion
 
     private routes (): Array<express.Router> {
         return [
+            new GenderRouter().router,
             new SongRouter().router,
             new UserRouter().router
         ]
     }
 
     private async dbConexion (): Promise<DataSource> {
-        return this.initConexion
+        return await this.initConexion
     }
 
     listen() {

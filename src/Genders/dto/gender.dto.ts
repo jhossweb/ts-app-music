@@ -1,6 +1,6 @@
 import { IsNotEmpty } from "class-validator";
 
-export class genderDTO {
+export class GenderDTO {
 
     @IsNotEmpty()
     name_gender!: string

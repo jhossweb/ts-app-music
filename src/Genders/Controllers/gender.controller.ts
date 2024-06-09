@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
-import { GenderService } from "../Services/gender.service";
+import { GenderService } from "../services/gender.service";
+
+
 
 export class GenderController 
 {

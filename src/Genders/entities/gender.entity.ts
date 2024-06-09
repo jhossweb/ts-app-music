@@ -2,7 +2,7 @@ import { Column, Entity } from "typeorm";
 import { BaseEntity } from "../../config/base.entity";
 
 @Entity({ name: "genders" })
-export class GenerEntity extends BaseEntity 
+export class GenderEntity extends BaseEntity 
 {
     @Column({
         type: "varchar",
