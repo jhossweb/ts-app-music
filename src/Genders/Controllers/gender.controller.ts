@@ -20,12 +20,13 @@ export class GenderController
     }
 
     async store(req: Request, res: Response) {
-        const genderSaved = await this.genderService.createGenderService(req.body)
+        // const genderSaved = await this.genderService.createGenderService(req.body)
 
-        if(!genderSaved) 
-            return new Error("No se guardó")
+        // if(!genderSaved) 
+        //     return new Error("No se guardó")
 
-        return res.json(genderSaved)
+        // return res.json(genderSaved)
+        console.log(req.body)
     }
 
     async update (req: Request, res: Response) {

@@ -24,5 +24,10 @@ export class SongRouter extends BaseRouter <SongController, SongMiddleware>
             (req, res, next) => [this.middleware.upload(req, res, next)],
             (req, res) => this.controller.store(req, res)
         )
+
+        this.router.put(
+            "/songs/:id",
+            (req, res) => this.controller.update(req, res)
+        )
     }
 }

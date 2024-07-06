@@ -13,7 +13,7 @@ export class SongController
     async index (req: Request, res: Response) {
         try {
             
-            const songs = await this.songService.getAllSongService()
+            const songs = await this.songService.getFindBySongWithGender()
             if(!songs)
                 return this.customerResponse.NotFound(res, "No hay Canciones para mostrar")
 
@@ -41,19 +41,33 @@ export class SongController
     async store(req: Request, res: Response) {
         try {
             const file = req.file as Express.Multer.File
-            const { name_song } = req.body
+            const { name_song, genders } = req.body
 
             const uploadFile = {
                 name_song: name_song,
-                url_song: file.path
+                url_song: file.path,
+                genders: genders
             }
             
             const songSaved = await this.songService.createSongService(uploadFile)
 
             if(!songSaved)
                 return this.customerResponse.InternalServerError(res, "No se pudo Error al subir la concion")
+            console.log(req.body)
 
             return this.customerResponse.Ok(res, "Concion subida con exito")
+        } catch (error) {
+            return this.customerResponse.InternalServerError(res, error)
+        }
+    }
+
+    async update (req: Request, res: Response) {
+        try {
+            const id = Number(req.params.id)
+            const songUpdate = await this.songService.updateGenderSongService(id, req.body)
+
+            if(!songUpdate) return this.customerResponse.Error("no se actualizo la cancion")
+            return res.json(songUpdate)
         } catch (error) {
             return this.customerResponse.InternalServerError(res, error)
         }

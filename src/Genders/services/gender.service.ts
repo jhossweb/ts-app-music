@@ -1,4 +1,4 @@
-import { DeleteResult, UpdateResult } from "typeorm";
+import { DeleteResult, In, UpdateResult } from "typeorm";
 import { AppDataSource } from "../../config/data-source";
 import { GenderDTO } from "../dto/gender.dto";
 import { GenderEntity } from "../entities/gender.entity";
@@ -10,6 +10,12 @@ export class GenderService
     async findGenderService(): Promise<GenderEntity[]> {
         const gender = await this.repository.getRepository(GenderEntity).find()
         return gender
+    }
+
+    async findGenderByIds (ids: GenderDTO[]): Promise<GenderEntity[]> {
+        return await this.repository.getRepository(GenderEntity).find({
+            where: { id: In(ids) }
+        })
     }
 
     async findGenderByName(name_gender: GenderDTO): Promise<GenderEntity | null> {

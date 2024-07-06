@@ -1,5 +1,6 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToMany } from "typeorm";
 import { BaseEntity } from "../../config/base.entity";
+import { SongEntity } from "../../Songs/entities/song.entity";
 
 @Entity({ name: "genders" })
 export class GenderEntity extends BaseEntity 
@@ -10,4 +11,7 @@ export class GenderEntity extends BaseEntity
         unique: true
     })
     name_gender!: string
+
+  @ManyToMany( () => SongEntity, (song) => song.genders )
+  songs!: SongEntity[]
 }
